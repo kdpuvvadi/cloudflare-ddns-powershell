@@ -16,7 +16,7 @@ $apiHeader = @{
         "Content-Type" = "application/json"
 }
 
-$getUri = "https://api.cloudflare.com/client/v4/zones/$actVars.zoneID/dns_records?type=A&name=ss.puvvadi.me"
+$getUri = "https://api.cloudflare.com/client/v4/zones/b80f905f6a7cee8c93502a448400bf6e/dns_records?type=A&name=ss.puvvadi.me"
 
 
 Invoke-RestMethod -Method Get -Headers $apiHeader -Uri $getUri
