@@ -17,7 +17,7 @@ $apiHeader = @{
 }
 
 #api url
-$getUri = "https://api.cloudflare.com/client/v4/zones/$($actVars.zoneID)/dns_records?type=$($actVars.recordtype)&name=$($actVars.recordName)"
+$getUri = "https://api.cloudflare.com/client/v4/zones/$($actVars.zoneID)/dns_records?type=$($actVars.recordType)&name=$($actVars.record)"
 
 #record ID with get request
 $getRecord = Invoke-RestMethod -Method Get -Headers $apiHeader -Uri $getUri
