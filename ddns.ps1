@@ -37,4 +37,8 @@ $putBody = @{
 
 $jsonBody = $putBody | ConvertTo-Json
 
-Invoke-RestMethod -Method PUT -Headers $apiHeader -Uri $putUri -Body $jsonBody
+$updateRecord Invoke-RestMethod -Method PUT -Headers $apiHeader -Uri $putUri -Body $jsonBody
+
+if ( $updateRecord.sucess == true ) {
+        Write-Host "Success fully update $actVars.record to $getIP.ip_addr "
+}
