@@ -2,9 +2,10 @@ Write-Host "DDNS for Cloudflare on Windows 10"
 
 # Get Public IP with ifconfig
 $getIP = Invoke-RestMethod -Method GET -Uri  https://ifconfig.me/all.json
+$PublicIp = $getIP.ip_addr
 
 #Printing the Public IP
-Write-Host "Public IP Address of your machine is"$getIP.ip_addr
+Write-Host "Public IP Address of your machine is $PublicIP"
 
 #Read variables from vars.ini
 $actVars = Get-Content -Path 'vars.ini' | ConvertFrom-StringData
