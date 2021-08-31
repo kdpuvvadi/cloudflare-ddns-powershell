@@ -34,3 +34,5 @@ $putBody = @{
         "name" = "$actVars.record"
         "content" = "$getIP.ip_addr"
 }
+
+Invoke-RestMethod -Method PUT -Headers $apiHeader -Uri $putUri -Body $putBody
