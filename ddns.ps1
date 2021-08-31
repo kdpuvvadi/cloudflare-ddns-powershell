@@ -31,9 +31,10 @@ $updateBody = @{
         "proxied"= $true
 }
 
+#converting powershell to json
 $jsonBody = $updateBody | ConvertTo-Json
 
-
+#check command status
 function resultDNS ($checkRecord) {
         
         if ( $checkRecord -eq $true ) {
@@ -46,7 +47,7 @@ function resultDNS ($checkRecord) {
         
 }
 
-
+# create if the record doesn't exist, else update
 if ($null -eq $($getRecord.result)) {
         Write-Host "$($actVars.record) does not exist on the cloudflare"
 
