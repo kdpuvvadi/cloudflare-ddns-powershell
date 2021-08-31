@@ -38,7 +38,7 @@ $jsonBody = $updateBody | ConvertTo-Json
 function resultDNS ($checkRecord) {
         
         if ( $checkRecord -eq $true ) {
-                Write-Host "Success fully updated DNS record for $($actVars.record) to $($getIP.ip_addr)"
+                Write-Host "Successfully updated DNS record for $($actVars.record) to $($getIP.ip_addr)"
         }
         else {
                 Write-Host "An error occured"
