@@ -10,7 +10,6 @@ Write-Host "Public IP Address of your machine is"$getIP.ip_addr
 $actVars = Get-Content -Path 'vars.ini' | ConvertFrom-StringData
 
 $apiHeader = @{
-        Method = "GET"
         "X-Auth-Email" = $actVars.email
         "X-Auth-Key" = $actVars.apikey
         "Content-Type" = "application/json"
