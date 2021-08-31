@@ -9,7 +9,7 @@ Write-Host "Public IP Address of your machine is"$getIP.ip_addr
 #Read variables from vars.ini
 $actVars = Get-Content -Path 'vars.ini' | ConvertFrom-StringData
 
-# API auth headers
+#API auth headers
 $apiHeader = @{
         "X-Auth-Email" = $actVars.email
         "X-Auth-Key" = $actVars.apikey
@@ -22,12 +22,10 @@ $getUri = "https://api.cloudflare.com/client/v4/zones/$($actVars.zoneID)/dns_rec
 #record ID with get request
 $getRecord = Invoke-RestMethod -Method Get -Headers $apiHeader -Uri $getUri
 
-#output record id
-Write-Host $getRecord.result.id
 
-$putUri = "https://api.cloudflare.com/client/v4/zones/$($actVars.zoneID)/dns_records/$($getRecord.result.id)"
+$updateUri = "https://api.cloudflare.com/client/v4/zones/$($actVars.zoneID)/dns_records/$($getRecord.result.id)"
 
-$putBody = @{
+$updateBody = @{
         "type"= "$($actVars.recordType)"
         "name"= "$($actVars.record)"
         "content"= "$($getIP.ip_addr)"
@@ -35,10 +33,15 @@ $putBody = @{
         "proxied"= $true
 }
 
-$jsonBody = $putBody | ConvertTo-Json
+$jsonBody = $updateBody | ConvertTo-Json
 
-$updateRecord Invoke-RestMethod -Method PUT -Headers $apiHeader -Uri $putUri -Body $jsonBody
+$updateRecord = Invoke-RestMethod -Method PUT -Headers $apiHeader -Uri $updateUri -Body $jsonBody
 
-if ( $updateRecord.sucess == true ) {
-        Write-Host "Success fully update $actVars.record to $getIP.ip_addr "
+if ( $updateRecord.success -eq $true ) {
+        Write-Host "Success fully updated DNS record for $($actVars.record) to $($getIP.ip_addr)"
+}
+else {
+        Write-Host "An error occured"
+        Write-Host "$($updateRecord.errors)"
+        Write-Host "$($updateRecord.messages)"
 }
