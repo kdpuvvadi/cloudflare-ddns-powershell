@@ -26,7 +26,7 @@ $getRecord = Invoke-RestMethod -Method Get -Headers $apiHeader -Uri $getUri -Pas
 $updateBody = @{
         "type"= "$($actVars.recordType)"
         "name"= "$($actVars.record)"
-        "content"= "$($getIP.ip_addr)"
+        "content"= "$($PublicIP)"
         "ttl"= 1
         "proxied"= $true
 }
