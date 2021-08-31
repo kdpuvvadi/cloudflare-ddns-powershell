@@ -27,12 +27,14 @@ Write-Host $getRecord.result.id
 
 $putUri = "https://api.cloudflare.com/client/v4/zones/$($actVars.zoneID)/dns_records/$($getRecord.result.id)"
 
-Write-Host $putUri
-
 $putBody = @{
-        "type" = "$actVars.recordType"
-        "name" = "$actVars.record"
-        "content" = "$getIP.ip_addr"
+        "type"= "$($actVars.recordType)"
+        "name"= "$($actVars.record)"
+        "content"= "$($getIP.ip_addr)"
+        "ttl"= 1
+        "proxied"= $true
 }
 
-Invoke-RestMethod -Method PUT -Headers $apiHeader -Uri $putUri -Body $putBody
+$jsonBody = $putBody | ConvertTo-Json
+
+Invoke-RestMethod -Method PUT -Headers $apiHeader -Uri $putUri -Body $jsonBody
