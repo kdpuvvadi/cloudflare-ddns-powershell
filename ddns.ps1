@@ -32,6 +32,20 @@ $updateBody = @{
 
 $jsonBody = $updateBody | ConvertTo-Json
 
+
+function resultDNS ($checkRecord) {
+        
+        if ( $checkRecord -eq $true ) {
+                Write-Host "Success fully updated DNS record for $($actVars.record) to $($getIP.ip_addr)"
+        }
+        else {
+                Write-Host "An error occured"
+                
+        }
+        
+}
+
+
 if ($null -eq $($getRecord.result)) {
         Write-Host "$($actVars.record) does not exist on the cloudflare"
 
@@ -39,14 +53,7 @@ if ($null -eq $($getRecord.result)) {
 
         $createRecord = Invoke-RestMethod -Method POST -Headers $apiHeader -Uri $createUri -Body $jsonBody
 
-        if ( $createRecord.success -eq $true ) {
-                Write-Host "Success fully updated DNS record for $($actVars.record) to $($getIP.ip_addr)"
-        }
-        else {
-                Write-Host "An error occured"
-                Write-Host "$($createRecord.errors)"
-                Write-Host "$($createRecord.messages)"
-        }
+        resultDNS -checkRecord $($createRecord.success)
 
 }
 else {
@@ -54,13 +61,7 @@ else {
 
         $updateRecord = Invoke-RestMethod -Method PUT -Headers $apiHeader -Uri $updateUri -Body $jsonBody
 
-        if ( $updateRecord.success -eq $true ) {
-                Write-Host "Success fully updated DNS record for $($actVars.record) to $($getIP.ip_addr)"
-        }
-        else {
-                Write-Host "An error occured"
-                Write-Host "$($updateRecord.errors)"
-                Write-Host "$($updateRecord.messages)"
-        }
+        resultDNS -checkRecord $($updateRecord.success)
+
 }
 
