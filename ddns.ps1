@@ -38,7 +38,7 @@ $updateBody = @{
 $jsonBody = $updateBody | ConvertTo-Json
 
 if ($null -eq $($getRecord.result)) {
-        Write-Host " $($actVars.record) does not exist on the cloudflare "
+        Write-Host "$($actVars.record) does not exist on the cloudflare "
 }
 else {
         $updateRecord = Invoke-RestMethod -Method PUT -Headers $apiHeader -Uri $updateUri -Body $jsonBody
