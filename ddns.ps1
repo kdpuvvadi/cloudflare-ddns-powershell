@@ -9,23 +9,14 @@ Write-Host "Public IP Address of your machine is"$getIP.ip_addr
 #Read variables from vars.ini
 $actVars = Get-Content -Path 'vars.ini' | ConvertFrom-StringData
 
-Write-Host $actVars
-
-# $getParametrs = @{
-#     Method = "GET"
-#     "X-Auth-Email" = $actVars.email
-#     "X-Auth-Key" = $actVars.apikey
-#     ContentType = "application/json"
-#     Uri = "https://api.cloudflare.com/client/v4/zones/$actVars.zoneID/dns_records?type=$actVars.recordtype&name=$actVars.recordName.$actVars.domain"
-# }
-
 $apiHeader = @{
         Method = "GET"
         "X-Auth-Email" = $actVars.email
         "X-Auth-Key" = $actVars.apikey
+        "Content-Type" = "application/json"
 }
 
 $getUri = "https://api.cloudflare.com/client/v4/zones/$actVars.zoneID/dns_records?type=A&name=ss.puvvadi.me"
 
 
-Invoke-RestMethod -Method Get -Headers $apiHeader -Uri $getUri -ContentType application/json
+Invoke-RestMethod -Method Get -Headers $apiHeader -Uri $getUri
