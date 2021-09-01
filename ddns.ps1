@@ -25,6 +25,8 @@ $getUri = "https://api.cloudflare.com/client/v4/zones/$($actVars.zoneID)/dns_rec
 #record ID with get request
 $getRecord = Invoke-RestMethod -Method Get -Headers $apiHeader -Uri $getUri -PassThru -OutFile .\log.txt
 
+Write-Host $getRecord.result.content
+
 $updateBody = @{
         "type"= "$($actVars.recordType)"
         "name"= "$($actVars.record)"
@@ -49,8 +51,12 @@ function resultDNS ($checkRecord, $updateType) {
         
 }
 
-# create if the record doesn't exist, else update
-if ($null -eq $($getRecord.result)) {
+# skip if the recrod is upto date
+if ($PublicIP -eq $getRecord.result.content ) {
+        Write-Host "$($actVars.record) is already upto date."
+}
+# Create new record if does not exist
+elseif ($null -eq $($getRecord.result)) {
         Write-Host "$($actVars.record) does not exist on the cloudflare"
 
         $createUri = "https://api.cloudflare.com/client/v4/zones/$($actVars.zoneID)/dns_records/"
@@ -60,6 +66,7 @@ if ($null -eq $($getRecord.result)) {
         resultDNS -checkRecord $($createRecord.success) -updateType created
 
 }
+# Update if the record exist but different content
 else {
         $updateUri = "https://api.cloudflare.com/client/v4/zones/$($actVars.zoneID)/dns_records/$($getRecord.result.id)"
 
