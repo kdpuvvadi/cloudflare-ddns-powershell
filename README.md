@@ -1,7 +1,7 @@
 
 # Cloudflare DDNS service for Windows
 
-DDNS service for cloudflare users running windows with PowerShell
+DDNS service for cloudflare users with PowerShell
 
 ## Getting Started
 
