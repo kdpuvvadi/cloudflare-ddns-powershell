@@ -1,3 +1,5 @@
+Param($varfile='vars.ini') # argument variable  in INI file
+
 Write-Host "DDNS for Cloudflare on Windows 10"
 
 # Get Public IP with ifconfig
@@ -7,8 +9,8 @@ $PublicIP = $getIP.ip_addr
 #Printing the Public IP
 Write-Host "Public IP Address of your machine is $PublicIP"
 
-#Read variables from vars.ini
-$actVars = Get-Content -Path 'vars.ini' | ConvertFrom-StringData
+#Read variables from ini
+$actVars = Get-Content -Path $varfile | ConvertFrom-StringData
 
 #API auth headers
 $apiHeader = @{
