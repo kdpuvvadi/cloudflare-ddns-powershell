@@ -72,4 +72,3 @@ else {
         resultDNS -checkRecord $($updateRecord.success) -updateType updated
 
 }
-
