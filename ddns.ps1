@@ -25,7 +25,6 @@ $getUri = "https://api.cloudflare.com/client/v4/zones/$($actVars.zoneID)/dns_rec
 #record ID with get request
 $getRecord = Invoke-RestMethod -Method Get -Headers $apiHeader -Uri $getUri -PassThru -OutFile .\log.txt
 
-Write-Host $getRecord.result.content
 
 $updateBody = @{
         "type"= "$($actVars.recordType)"
