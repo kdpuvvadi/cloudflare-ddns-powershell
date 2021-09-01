@@ -35,10 +35,10 @@ $updateBody = @{
 $jsonBody = $updateBody | ConvertTo-Json
 
 #check command status
-function resultDNS ($checkRecord) {
+function resultDNS ($checkRecord, $updateType) {
         
         if ( $checkRecord -eq $true ) {
-                Write-Host "Successfully updated DNS record for $($actVars.record) to $($getIP.ip_addr)"
+                Write-Host "Successfully $updateType DNS record for $($actVars.record) to $($PublicIP)"
         }
         else {
                 Write-Host "An error occured"
@@ -55,7 +55,7 @@ if ($null -eq $($getRecord.result)) {
 
         $createRecord = Invoke-RestMethod -Method POST -Headers $apiHeader -Uri $createUri -Body $jsonBody
 
-        resultDNS -checkRecord $($createRecord.success)
+        resultDNS -checkRecord $($createRecord.success) -updateType created
 
 }
 else {
@@ -63,7 +63,7 @@ else {
 
         $updateRecord = Invoke-RestMethod -Method PUT -Headers $apiHeader -Uri $updateUri -Body $jsonBody
 
-        resultDNS -checkRecord $($updateRecord.success)
+        resultDNS -checkRecord $($updateRecord.success) -updateType updated
 
 }
 
