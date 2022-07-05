@@ -1,6 +1,6 @@
 Param($varfile='vars.ini') # argument variable  in INI file
 
-Write-Host "DDNS for Cloudflare on Windows 10"
+Write-Host "DDNS for Cloudflare with Powershell"
 
 # Get Public IP with ifconfig
 $getIP = Invoke-RestMethod -Method GET -Uri  https://ifconfig.me/all.json
