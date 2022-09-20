@@ -15,18 +15,34 @@ Copy-Item -Path eg.vars.ini -Destination vars.ini
 Edit `vars.ini` and replace the values with your own.
 
 ```ini
-apiKey= 
+apiKey=
+apiToken=
 email=
 zoneID=
 record=
 recordType=
 ```
 
+## Creating a Cloudflare API token
+
+To create a CloudFlare API token for your DNS zone go to [https://dash.cloudflare.com/profile/api-tokens](https://dash.cloudflare.com/profile/api-tokens) and follow these steps:
+
+* Click Create Token
+* Provide the token a name, for example, cloudflare-ddns
+* Grant the token the following permissions:
+* `Zone` - `Zone Settings` - `Read`
+* `Zone` - `Zone` - `Read`
+* `Zone` - `DNS` - `Edit`
+* Set the zone resources to:
+* Include - All zones
+
+Complete the wizard and copy the generated token into the API_KEY variable for the container
+
 * `apiKey`: Go to your [Cloudflare Profile](https://dash.cloudflare.com/profile/api-tokens) and grab the `API Key`
 * `email`: Your Cloudflare Email
 * `zoneID`: Go to [Cloudflare Dashboard](https://dash.cloudflare.com/), select the Zone and copy the Zone ID on the right side
 * `record`: Full record name e.g exmaple.com or subdomain site1.example.com
-* `recordType`: Set this to A (set something else, if you know what you doing)
+* `recordType`: Set this to A
 
 ## Deployment
 
