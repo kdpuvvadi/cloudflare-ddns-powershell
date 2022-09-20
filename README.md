@@ -1,27 +1,8 @@
 # Cloudflare DDNS service for Windows
 
-![cloudflare-ddns](ddns_cloudflare_powershell.png)
+![cloudflare-ddns](img/ddns_cloudflare_powershell.png)
 
 DDNS service for cloudflare users with PowerShell
-
-## Getting Started
-
-Copy `eg.vars.ini` to `vars.ini` or whatever you like e.g. `file.ini`
-
-```powershell
-Copy-Item -Path eg.vars.ini -Destination vars.ini
-```
-
-Edit `vars.ini` and replace the values with your own.
-
-```ini
-apiKey=
-apiToken=
-email=
-zoneID=
-record=
-recordType=
-```
 
 ## Creating a Cloudflare API token
 
@@ -36,20 +17,33 @@ To create a CloudFlare API token for your DNS zone go to [https://dash.cloudflar
 * Set the zone resources to:
 * Include - All zones
 
-Complete the wizard and copy the generated token into the API_KEY variable for the container
+## Getting Started
 
-* `apiKey`: Go to your [Cloudflare Profile](https://dash.cloudflare.com/profile/api-tokens) and grab the `API Key`
-* `email`: Your Cloudflare Email
-* `zoneID`: Go to [Cloudflare Dashboard](https://dash.cloudflare.com/), select the Zone and copy the Zone ID on the right side
-* `record`: Full record name e.g exmaple.com or subdomain site1.example.com
-* `recordType`: Set this to A
+Copy `eg.vars.ini` to `vars.ini` or whatever you like e.g. `file.ini`
+
+```powershell
+Copy-Item -Path eg.vars.ini -Destination vars.ini
+```
+
+Edit `vars.ini` and replace the values with your own.
+
+```ini
+apiToken=
+domain=
+subdomain=
+```
+
+Complete the wizard and copy the generated token into the `apiToken` variable for the container
+
+* `domain`:  `example.com`
+* `subdomain`: `test`
 
 ## Deployment
 
 To deploy this project run
 
 ```powershell
-ddns.ps1 -varfile vars.ini
+.\ddns.ps1
 ```
 
 ## Auto Update
