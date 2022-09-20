@@ -33,8 +33,7 @@ domain=
 subdomain=
 ```
 
-Complete the wizard and copy the generated token into the `apiToken` variable for the container
-
+* `apiToken`: Token generated from previsous wizard.
 * `domain`:  `example.com`
 * `subdomain`: `test`
 
