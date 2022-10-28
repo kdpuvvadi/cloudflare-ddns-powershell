@@ -28,14 +28,11 @@ Copy-Item -Path eg.vars.ini -Destination vars.ini
 Edit `vars.ini` and replace the values with your own.
 
 ```ini
-apiToken=
-domain=
-subdomain=
-```
 
-* `apiToken`: Token generated from previsous wizard.
-* `domain`:  `example.com`
-* `subdomain`: `test`
+apiToken=    ;Token generated from previsous wizard.
+domain=      ;example.com
+subdomain=   ;test (test.example.com)
+```
 
 ## Deployment
 
@@ -48,3 +45,24 @@ To deploy this project run
 ## Auto Update
 
 Create a task Scheduler task to repeat the task every 5 min to update the record periodically.
+
+### Trigger
+
+* `Begin the task`: `On a Shedule`
+* Settings: `Daily` & Recur Every `1` Day
+* Repeat the task every `5 minutes` for a duration of `indefinitely`
+
+### Actions
+
+* Action: `Start a program`
+* Prgram/Script:
+  * `"C:\Program Files\PowerShell\7\pwsh.exe"` for Powershell 7
+  * `"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"` for Powershell 5
+* Add arguments: `-File ~\Documents\cloudflare-ddns-powershell\ddns.ps1`
+* Start in: `~\Documents\cloudflare-ddns-powershell\`
+
+> Change the path to actual path. Here assuming it is store in Documents.
+
+## LICENSE
+
+Licensed under [MIT](/LICENSE)
