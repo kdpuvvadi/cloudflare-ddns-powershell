@@ -28,11 +28,14 @@ Copy-Item -Path eg.vars.ini -Destination vars.ini
 Edit `vars.ini` and replace the values with your own.
 
 ```ini
-
-apiToken=    ;Token generated from previsous wizard.
-domain=      ;example.com
-subdomain=   ;test (test.example.com)
+apiToken=
+domain=      
+subdomain=
 ```
+
+* apiToken: Cloudflare `token` (generated from previsous wizard)
+* domain: Domain Name (example.com)
+* Subdomain: `cname` for the subdomain (test is test.example.com)
 
 ## Deployment
 
