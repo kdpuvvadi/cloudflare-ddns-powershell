@@ -58,11 +58,11 @@ Create a task Scheduler task to repeat the task every 5 min to update the record
 ### Actions
 
 * Action: `Start a program`
-* Prgram/Script:
+* Program/Script:
   * `"C:\Program Files\PowerShell\7\pwsh.exe"` for Powershell 7
   * `"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"` for Powershell 5
-* Add arguments: `-File ~\Documents\cloudflare-ddns-powershell\ddns.ps1`
-* Start in: `~\Documents\cloudflare-ddns-powershell\`
+* Add arguments: `-File "~\Documents\cloudflare-ddns-powershell\ddns.ps1"`
+* Start in: `"~\Documents\cloudflare-ddns-powershell\"`
 
 > Change the path to actual path. Here assuming it is store in Documents.
 
